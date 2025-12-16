@@ -19,7 +19,7 @@
 
 ## Preview
 
-![Kate Editor Screenshot](screenshot.png)
+![alt text](https://drive.google.com/file/d/1WLlDH3n5GrBgl0G6Jce_k5-NxFwKs7It/view?usp=drive_link)
 
 ## Installation
 
