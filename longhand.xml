@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd">
+<language name="Longhand" version="1.0" kateversion="5.0" section="Markup" extensions="*.fountain" mimetype="text/x-fountain" author="Claude" license="MIT">
+  <highlighting>
+    <contexts>
+      <context name="Normal" attribute="Action" lineEndContext="#stay">
+        
+        <!-- Scene Headings (INT./EXT.) - like Python keywords -->
+        <RegExpr attribute="Scene Heading" context="#stay" String="^(INT|EXT|INT./EXT|INT/EXT|EXT./INT|EXT/INT|I/E|E/I)[\.\s].*$" column="0" beginRegion="scene"/>
+        
+        <!-- Transitions (CUT TO:, FADE TO:, etc.) - like Python keywords -->
+        <RegExpr attribute="Transition" context="#stay" String="^(&gt;.*|.*TO:)$" column="0"/>
+        
+        <!-- Character names (all caps, with optional parenthetical like (V.O.)) -->
+        <RegExpr attribute="Character" context="Dialogue" String="^[A-Z\s\.\-']+(\s*\([^\)]*\))?(\s*\^)?$" column="0" lookAhead="false"/>
+        
+        <!-- All caps followed by colon (custom transitions/special formatting) -->
+        <RegExpr attribute="CapsColon" context="#stay" String="^[A-Z\s]+:"/>
+        
+        <!-- Parentheticals in dialogue - like Python strings -->
+        <RegExpr attribute="Parenthetical" context="#stay" String="^\s*\([^\)]*\)\s*$"/>
+        
+        <!-- Section Headings (# for structure) - like Python decorators -->
+        <RegExpr attribute="Section" context="#stay" String="^#{1,6}\s+.*$" column="0"/>
+        
+        <!-- Synopses (= lines) - like Python comments -->
+        <RegExpr attribute="Synopsis" context="#stay" String="^=\s+.*$" column="0"/>
+        
+        <!-- Notes [[text]] - like Python comments -->
+        <RegExpr attribute="Note" context="#stay" String="\[\[.*?\]\]"/>
+        
+        <!-- Boneyard (/* ... */) - like Python multiline comments -->
+        <Detect2Chars attribute="Boneyard" context="Boneyard" char="/" char1="*"/>
+        
+        <!-- Emphasis and formatting -->
+        <RegExpr attribute="Bold" context="#stay" String="\*\*[^\*]+\*\*"/>
+        <RegExpr attribute="Italic" context="#stay" String="\*[^\*]+\*"/>
+        <RegExpr attribute="Underline" context="#stay" String="_[^_]+_"/>
+        
+        <!-- Page breaks -->
+        <RegExpr attribute="PageBreak" context="#stay" String="^={3,}$" column="0"/>
+        
+        <!-- Centered text -->
+        <RegExpr attribute="Centered" context="#stay" String="^&gt;[^&lt;]*&lt;$" column="0"/>
+        
+      </context>
+      
+      <!-- Dialogue context (after character name) -->
+      <context name="Dialogue" attribute="Dialogue" lineEndContext="#pop">
+        <RegExpr attribute="Parenthetical" context="#stay" String="^\s*\([^\)]*\)\s*$"/>
+        <DetectChar attribute="Action" context="#pop" char="&#10;"/>
+      </context>
+      
+      <!-- Boneyard (block comments) context -->
+      <context name="Boneyard" attribute="Boneyard" lineEndContext="#stay">
+        <Detect2Chars attribute="Boneyard" context="#pop" char="*" char1="/"/>
+      </context>
+      
+    </contexts>
+    
+    <itemDatas>
+      <!-- Python-inspired color scheme with custom adjustments -->
+      <itemData name="Action" defStyleNum="dsNormal"/>
+      <itemData name="Scene Heading" defStyleNum="dsAnnotation" bold="1" color="#FFD700"/>
+      <itemData name="Character" defStyleNum="dsDataType" bold="1"/>
+      <itemData name="Dialogue" defStyleNum="dsString" color="#5dade2"/>
+      <itemData name="Parenthetical" defStyleNum="dsComment" italic="1"/>
+      <itemData name="Transition" defStyleNum="dsKeyword" bold="1"/>
+      <itemData name="Section" defStyleNum="dsFunction" bold="1"/>
+      <itemData name="Synopsis" defStyleNum="dsComment" italic="1"/>
+      <itemData name="Note" defStyleNum="dsComment" italic="1"/>
+      <itemData name="Boneyard" defStyleNum="dsComment" italic="1"/>
+      <itemData name="Bold" defStyleNum="dsNormal" bold="1"/>
+      <itemData name="Italic" defStyleNum="dsNormal" italic="1"/>
+      <itemData name="Underline" defStyleNum="dsNormal" underline="1"/>
+      <itemData name="PageBreak" defStyleNum="dsKeyword"/>
+      <itemData name="Centered" defStyleNum="dsNormal" italic="1"/>
+      <itemData name="CapsColon" defStyleNum="dsString" color="#00FF00"/>
+    </itemDatas>
+    
+  </highlighting>
+  
+  <general>
+    <comments>
+      <comment name="multiLine" start="/*" end="*/" region="Boneyard"/>
+    </comments>
+    <keywords casesensitive="1"/>
+    <folding indentationsensitive="0"/>
+  </general>
+  
+</language>
