@@ -1,6 +1,9 @@
 # Longhand - Fountain Syntax Highlighting for Kate
 
-![Longhand Logo](fountain_kate_logo.svg)
+<div align="center">
+   <img src="fountain_kate_logo.svg" width="200" height="200">
+</div align="center">
+
 
 **Longhand** is a syntax highlighting definition for the [Fountain](https://fountain.io) screenwriting format, designed for the Kate text editor on Linux and Windows. Named as a tribute to the classic way of writing scripts, Longhand brings modern syntax highlighting to your screenwriting workflow.
 
