@@ -44,6 +44,38 @@
 
 5. Open a `.fountain` file or manually select **Tools > Highlighting > Markup > Longhand**
 
+### macOS
+
+1. Download `longhand.xml` from this repository
+
+2. Create the syntax directory if it doesn't exist:
+   ```bash
+   mkdir -p ~/Library/Application\ Support/org.kde.syntax-highlighting/syntax/
+   ```
+
+3. Copy the syntax file:
+   ```bash
+   cp longhand.xml ~/Library/Application\ Support/org.kde.syntax-highlighting/syntax/
+   ```
+
+4. Restart Kate (completely quit with Cmd+Q, then reopen)
+
+5. Open a `.fountain` file or manually select **Tools > Highlighting > Markup > Longhand**
+
+**Alternative path** (if the above doesn't work):
+```bash
+mkdir -p ~/.local/share/org.kde.syntax-highlighting/syntax/
+cp longhand.xml ~/.local/share/org.kde.syntax-highlighting/syntax/
+```
+
+**Troubleshooting**:
+- Ensure Kate is fully closed (Cmd+Q), not just the window
+- Verify the file is named exactly `longhand.xml` (not `longhand.xml.txt`)
+- Check file permissions: 
+  ```bash
+  chmod 644 ~/Library/Application\ Support/org.kde.syntax-highlighting/syntax/longhand.xml
+  ```
+
 ### Windows
 
 1. Download `longhand.xml` from this repository
