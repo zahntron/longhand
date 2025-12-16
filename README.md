@@ -164,5 +164,8 @@ If you encounter issues:
 - For GNOME Text Editor, confirm your GtkSourceView version
 
 ---
+## Soap Box
+
+The ability to create art should be unbound from money. Even in the digital age, filmmaking can be quite expensive and the obsession with investing money in the right gear, software, and services as the mark of success is preposterous. I think proprietary and industry standard apps serve a valuable role but they don't have anything to do with being able to express onesself. And any of this work starts there before it can graduate to commercial potential. 
 
 **Happy screenwriting!** ✍️
