@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Fountain Syntax Highlighting for GNOME Text Editor (GtkSourceView)
+  Author: Claude
+  License: MIT
+-->
+<language id="longhand" name="Longhand" version="2.0" _section="Markup">
+  <metadata>
+    <property name="mimetypes">text/x-fountain</property>
+    <property name="globs">*.fountain</property>
+    <property name="line-comment-start">//</property>
+    <property name="block-comment-start">/*</property>
+    <property name="block-comment-end">*/</property>
+  </metadata>
+
+  <styles>
+    <style id="scene-heading" name="Scene Heading" map-to="def:keyword"/>
+    <style id="character" name="Character" map-to="def:type"/>
+    <style id="dialogue" name="Dialogue" map-to="def:string"/>
+    <style id="parenthetical" name="Parenthetical" map-to="def:comment"/>
+    <style id="transition" name="Transition" map-to="def:keyword"/>
+    <style id="section" name="Section" map-to="def:function"/>
+    <style id="synopsis" name="Synopsis" map-to="def:comment"/>
+    <style id="note" name="Note" map-to="def:comment"/>
+    <style id="boneyard" name="Boneyard" map-to="def:comment"/>
+    <style id="action" name="Action" map-to="def:normal"/>
+    <style id="bold" name="Bold" map-to="def:strong-emphasis"/>
+    <style id="italic" name="Italic" map-to="def:emphasis"/>
+    <style id="underline" name="Underline" map-to="def:underlined"/>
+    <style id="page-break" name="Page Break" map-to="def:keyword"/>
+    <style id="centered" name="Centered" map-to="def:emphasis"/>
+    <style id="caps-colon" name="Caps Colon" map-to="def:string"/>
+  </styles>
+
+  <definitions>
+    <context id="longhand" class="no-spell-check">
+      <include>
+        
+        <!-- Scene Headings: INT., EXT., etc. -->
+        <context id="scene-heading" style-ref="scene-heading" first-line-only="true">
+          <start>^(INT|EXT|INT\./EXT|INT/EXT|EXT\./INT|EXT/INT|I/E|E/I)[\.\s]</start>
+          <end>$</end>
+        </context>
+
+        <!-- Transitions: CUT TO:, FADE TO:, etc. -->
+        <context id="transition" style-ref="transition" first-line-only="true">
+          <match>^(&gt;.*|.*TO:)$</match>
+        </context>
+
+        <!-- All caps followed by colon (custom transitions/special formatting) -->
+        <context id="caps-colon" style-ref="caps-colon" first-line-only="true">
+          <match>^[A-Z\s]+:.*$</match>
+        </context>
+
+        <!-- Section Headings: # marks -->
+        <context id="section" style-ref="section" first-line-only="true">
+          <match>^#{1,6}\s+.*$</match>
+        </context>
+
+        <!-- Synopsis: = lines -->
+        <context id="synopsis" style-ref="synopsis" first-line-only="true">
+          <match>^=\s+.*$</match>
+        </context>
+
+        <!-- Page Breaks: === -->
+        <context id="page-break" style-ref="page-break" first-line-only="true">
+          <match>^={3,}$</match>
+        </context>
+
+        <!-- Centered text: >text< -->
+        <context id="centered" style-ref="centered" first-line-only="true">
+          <match>^&gt;[^&lt;]*&lt;$</match>
+        </context>
+
+        <!-- Notes: [[text]] -->
+        <context id="note" style-ref="note">
+          <start>\[\[</start>
+          <end>\]\]</end>
+        </context>
+
+        <!-- Boneyard (block comments): /* text */ -->
+        <context id="boneyard" style-ref="boneyard" class="comment">
+          <start>/\*</start>
+          <end>\*/</end>
+          <include>
+            <context ref="def:in-comment"/>
+          </include>
+        </context>
+
+        <!-- Character names: ALL CAPS at start of line (with optional parenthetical) -->
+        <context id="character" style-ref="character" first-line-only="true">
+          <match>^[A-Z\s\.\-']+(\s*\([^\)]*\))?(\s*\^)?$</match>
+        </context>
+
+        <!-- Parentheticals: (text) -->
+        <context id="parenthetical" style-ref="parenthetical" first-line-only="true">
+          <match>^\s*\([^\)]*\)\s*$</match>
+        </context>
+
+        <!-- Dialogue: indented text after character -->
+        <context id="dialogue" style-ref="dialogue" first-line-only="true">
+          <match>^\s{2,}.+$</match>
+        </context>
+
+        <!-- Emphasis: **bold** -->
+        <context id="bold" style-ref="bold">
+          <match>\*\*[^\*]+\*\*</match>
+        </context>
+
+        <!-- Emphasis: *italic* -->
+        <context id="italic" style-ref="italic">
+          <match>\*[^\*]+\*</match>
+        </context>
+
+        <!-- Emphasis: _underline_ -->
+        <context id="underline" style-ref="underline">
+          <match>_[^_]+_</match>
+        </context>
+
+        <!-- Default: Action lines -->
+        <context id="action" style-ref="action" extend-parent="false">
+          <match>^.*$</match>
+        </context>
+
+      </include>
+    </context>
+  </definitions>
+
+</language>
