@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="Longhand" version="1.0" kateversion="5.0" section="Markup" extensions="*.fountain" mimetype="text/x-fountain" author="Claude" license="MIT">
+<language name="Longhand" version="1.0" kateversion="5.0" section="Markup" extensions="*.fountain" mimetype="text/x-fountain" author="Ernie Zahn" license="MIT">
   <highlighting>
     <contexts>
       <context name="Normal" attribute="Action" lineEndContext="#stay">
